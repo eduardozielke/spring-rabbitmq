@@ -8,6 +8,6 @@ class MessageListener {
 
     @RabbitListener(queues = [MQConfig.QUEUE_NAME])
     fun listener(message: CustomMessage): Unit {
-        println(message)
+        println(message.message)
     }
 }
