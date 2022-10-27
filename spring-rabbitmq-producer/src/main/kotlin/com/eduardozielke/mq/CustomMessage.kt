@@ -1,8 +1,9 @@
 package com.eduardozielke.mq
 
+import java.io.Serializable
 import java.util.Date
 
-class CustomMessage {
+class CustomMessage : Serializable {
 
     var messageId: String? = null
     var message: String? = null
