@@ -15,20 +15,22 @@ import org.springframework.stereotype.Component
 //@Component
 @Configuration
 class MQConfig {
-    val queueName = "message_queue"
-    val exchangeName = "message_exchange"
-    val routingKey = "message_routingKey"
+    companion object {
+        const val QUEUE_NAME = "message_queue"
+        const val EXCHANGE_NAME = "message_exchange"
+        const val ROUTING_KEY = "message_routingKey"
+    }
 
     fun queue(): Queue {
-        return Queue(queueName)
+        return Queue(QUEUE_NAME)
     }
 
     fun exchange(): TopicExchange {
-        return TopicExchange(exchangeName)
+        return TopicExchange(EXCHANGE_NAME)
     }
 
     fun binding(queue: Queue, exchange: TopicExchange): Binding {
-        return BindingBuilder.bind(queue).to(exchange).with(routingKey)
+        return BindingBuilder.bind(queue).to(exchange).with(ROUTING_KEY)
     }
 
     fun messageConverter(): MessageConverter {
