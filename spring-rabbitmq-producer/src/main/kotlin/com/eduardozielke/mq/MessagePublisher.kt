@@ -8,10 +8,7 @@ import java.util.Date
 import java.util.UUID
 
 @RestController
-class MessagePublisher(
-    private val template: RabbitTemplate,
-    private val config: MQConfig
-) {
+class MessagePublisher(private val template: RabbitTemplate) {
 
     @PostMapping("/publish")
     fun publishMessage(@RequestBody message: CustomMessage): String {
@@ -20,7 +17,7 @@ class MessagePublisher(
             messageDate = Date()
         }
 
-        template.convertAndSend(config.exchangeName, config.routingKey, message)
+        template.convertAndSend(MQConfig.EXCHANGE_NAME, MQConfig.ROUTING_KEY, message)
         return "Message published"
     }
 }
